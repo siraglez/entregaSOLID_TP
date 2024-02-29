@@ -1,3 +1,5 @@
+package ejercicio1;
+
 public class Matriz {
     protected int[][] m;
 
@@ -35,10 +37,10 @@ public class Matriz {
         Matriz m = new Matriz(new int[][]{{1, 2}, {3, 4}});
         Matriz mt = m.transpuesta();
 
-        System.out.println("Matriz original: ");
+        System.out.println("ejercicio1.Matriz original: ");
         m.imprimir();
 
-        System.out.println("\nMatriz transpuesta: ");
+        System.out.println("\nejercicio1.Matriz transpuesta: ");
         mt.imprimir();
 
     }

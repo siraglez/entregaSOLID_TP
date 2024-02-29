@@ -4,15 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="74607669-7b8a-4fdd-8836-a5cdf4fefbe9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/entregaSOLID_TP.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/CoordenadasNoValidasException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Matriz.java" afterDir="false" />
+    <list default="true" id="74607669-7b8a-4fdd-8836-a5cdf4fefbe9" name="Changes" comment="codigo ejercicio1">
+      <change afterPath="$PROJECT_DIR$/src/ejercicio2/Authenticator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ejercicio2/DataBaseManager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ejercicio2/OrderManager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ejercicio2/PaymentProcessor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ejercicio2/SistemaGestionPedidosPizza.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Matriz.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ejercicio1/Matriz.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,7 +32,9 @@
   "associatedIndex": 5
 }]]></component>
   <component name="ProjectId" id="2cu7gYqRK89DoAl5xY4ZPOGL6Kz" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -41,8 +42,10 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Application.Matriz.executor": "Run",
+    "Application.SistemaGestionPedidosPizza.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
     "node.js.detected.package.eslint": "true",
@@ -72,11 +75,32 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1708949723143</updated>
-      <workItem from="1708949724686" duration="3705000" />
+      <workItem from="1708949724686" duration="9159000" />
     </task>
+    <task id="LOCAL-00001" summary="codigo ejercicio1">
+      <option name="closed" value="true" />
+      <created>1709204870190</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1709204870190</updated>
+    </task>
+    <task id="LOCAL-00002" summary="codigo ejercicio1">
+      <option name="closed" value="true" />
+      <created>1709204918239</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1709204918239</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="codigo ejercicio1" />
+    <option name="LAST_COMMIT_MESSAGE" value="codigo ejercicio1" />
   </component>
 </project>
