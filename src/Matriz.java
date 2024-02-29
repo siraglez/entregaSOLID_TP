@@ -1,6 +1,4 @@
 public class Matriz {
-    protected int fila;
-    protected int columna;
     protected int[][] m;
 
     //Constructor para la creación de la matriz
