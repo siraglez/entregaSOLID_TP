@@ -1,0 +1,42 @@
+@startuml
+
+class Authenticator {
+  - dataBaseManager: DataBaseManager
+  + Authenticator(dataBaseManager: DataBaseManager)
+  + authenticateUser(username: String, password: String): boolean
+}
+
+class DataBaseManager {
+  - userCredentials: Map<String, String>
+  - orders: Map<String, Integer>
+  - creditCardBalances: Map<String, Double>
+  + DataBaseManager()
+  + checkUserCredentials(username: String, password: String): boolean
+  + saveOrder(pizzaType: String, quantity: int): void
+  + chargeCreditCard(creditCardNumber: String, amount: double): boolean
+}
+
+class OrderManager {
+  - dataBaseManager: DataBaseManager
+  + OrderManager(dataBaseManager: DataBaseManager)
+  + createOrder(pizzaType: String, quantity: int): void
+}
+
+class PaymentProcessor {
+  - dataBaseManager: DataBaseManager
+  + PaymentProcessor(dataBaseManager: DataBaseManager)
+  + processPayment(creditCardNumber: String, amount: double): boolean
+}
+
+class SistemaGestionPedidosPizza {
+  + main(args: String[]): void
+}
+
+Authenticator --> DataBaseManager : composition
+OrderManager --> DataBaseManager : composition
+PaymentProcessor --> DataBaseManager : composition
+SistemaGestionPedidosPizza --> Authenticator
+SistemaGestionPedidosPizza --> OrderManager
+SistemaGestionPedidosPizza --> PaymentProcessor
+
+@enduml
