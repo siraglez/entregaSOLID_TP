@@ -1,46 +1,145 @@
 Algoritmo Authenticator
-    Datos
+    Privado
         dataBaseManager: DataBaseManager
-    Fin Datos
 
     Procedimiento Authenticator(dataBaseManager: DataBaseManager)
-        this.dataBaseManager <- dataBaseManager
-    Fin Procedimiento
+        dataBaseManager <- dataBaseManager
 
-    Función autenticarUsuario(username: cadena, password: cadena): boolean
+    Función autenticarUsuario(usuario: Cadena, contraseña: Cadena) retorna Booleano
         #Lógica de autenticación
-        #Retorna verdadero si la autenticación es exitosa, de lo contrario, retorna falso
-        Retornar dataBaseManager.verificarCredencialesUsuario(username, password)
+        #Retorna verdadero si la autenticación es exitosa, de lo contrario, devuelve falso
+        Retornar dataBaseManager.verificarCredencialesUsuario(usuario, contraseña)
     Fin Función
 Fin Algoritmo
 
 Algoritmo DataBaseManager
-    Datos
-        userCredentials: Map(cadena, cadena)
-        orders: Map(cadena, entero)
-        creditCardBalances: Map(cadena, decimal)
-    Fin Datos
+    Privado
+        userCredentials: Mapa(Cadena, Cadena)
+        orders: Mapa(Cadena, Entero)
+        creditCardBalances: Mapa(Cadena, Real)
 
     Procedimiento DataBaseManager()
         #Datos de ejemplo
-        userCredentials <- nuevo Map(cadena, cadena)
-        userCredentials.insertar("usuario", "contraseña") #Usuario de ejemplo con contraseña
+        userCredentials <- nuevo Mapa(Cadena, Cadena)
+        orders <- nuevo Mapa(Cadena, Entero)
+        creditCardBalances <- nuevo Mapa(Cadena, Real)
 
-        orders <- nuevo Map(cadena, entero)
-        creditCardBalances <- nuevo Map(cadena, decimal)
+        #Usuario de ejemplo con contraseña
+        userCredentials.agregar("usuario", "contraseña")
 
-        creditCardBalances.insertar("tarjeta123", 1000.0) #Saldo inicial de la tarjeta de crédito de ejemplo
+        #Saldo inicial de la tarjeta de crédito de ejemplo
+        creditCardBalances.agregar("tarjeta123", 1000.0)
     Fin Procedimiento
 
-    Función verificarCredencialesUsuario(username: cadena, password: cadena): boolean
+    Función verificarCredencialesUsuario(usuario: Cadena, contraseña: Cadena) retorna Booleano
         #Verificar las credenciales del usuario
-        Retornar userCredentials.contieneClave(username) Y userCredentials.obtener(username) = password
+        Retornar userCredentials.contieneClave(usuario) Y userCredentials.obtener(usuario) = contraseña
     Fin Función
 
-    Procedimiento guardarPedido(pizzaType: cadena, cantidad: entero)
+    Procedimiento guardarPedido(tipoPizza: Cadena, cantidad: Entero)
         #Guardar el pedido en la base de datos
-        cantidadExistente <- orders.obtenerODefault(pizzaType, 0)
-        orders.insertar(pizzaType, cantidadExistente + cantidad)
+        cantidadExistente <- orders.obtenerODefecto(tipoPizza, 0)
+        orders.agregar(tipoPizza, cantidadExistente + cantidad)
     Fin Procedimiento
 
-    Función cargarTarjetaCredito(numeroTarjeta: cadena
+    Función cargarTarjetaCredito(numeroTarjeta: Cadena, monto: Real) retorna Booleano
+        #Simular el proceso de carga en la tarjeta de crédito
+        Si creditCardBalances.contieneClave(numeroTarjeta) Y creditCardBalances.obtener(numeroTarjeta) >= monto Entonces
+            nuevoSaldo <- creditCardBalances.obtener(numeroTarjeta) - monto
+            creditCardBalances.agregar(numeroTarjeta, nuevoSaldo)
+            Retornar Verdadero
+        Sino
+            Retornar Falso
+        Fin Si
+    Fin Función
+Fin Algoritmo
+
+Algoritmo OrderManager
+    Privado
+        dataBaseManager: DataBaseManager
+
+    Procedimiento OrderManager(dataBaseManager: DataBaseManager)
+        dataBaseManager <- dataBaseManager
+
+    Procedimiento crearPedido(tipoPizza: Cadena, cantidad: Entero)
+        #Lógica para crear un pedido
+        dataBaseManager.guardarPedido(tipoPizza, cantidad)
+        Imprimir "Pedido creado: " + cantidad + " x " + tipoPizza
+    Fin Procedimiento
+Fin Algoritmo
+
+Algoritmo PaymentProcessor
+    Privado
+        dataBaseManager: DataBaseManager
+
+    Procedimiento PaymentProcessor(dataBaseManager: DataBaseManager)
+        dataBaseManager <- dataBaseManager
+
+    Función procesarPago(numeroTarjeta: Cadena, monto: Real) retorna Booleano
+        #Lógica para procesar el pago
+        Si dataBaseManager.cargarTarjetaCredito(numeroTarjeta, monto) Entonces
+            Imprimir "Pago exitoso: $" + monto
+            Retornar Verdadero
+        Sino
+            Imprimir "Fallo en el procesamiento del pago."
+            Retornar Falso
+        Fin Si
+    Fin Función
+Fin Algoritmo
+
+Algoritmo SistemaGestionPedidosPizza
+    #Crear instancia centralizada de DataBaseManager
+    dataBaseManager <- nuevo DataBaseManager()
+
+    #Inyectar instancias de las clases que las necesitan
+    authenticator <- nuevo Authenticator(dataBaseManager)
+    orderManager <- nuevo OrderManager(dataBaseManager)
+    paymentProcessor <- nuevo PaymentProcessor(dataBaseManager)
+
+    #Pedir al usuario que introduzca las credenciales
+    Imprimir "Ingrese su nombre de usuario: "
+    usuario <- Leer Cadena
+    Imprimir "Ingrese su contraseña: "
+    contraseña <- Leer Cadena
+
+    #Autenticar al usuario
+    autenticado <- authenticator.autenticarUsuario(usuario, contraseña)
+
+    Si autenticado Entonces
+        Imprimir "Autenticación exitosa. \n"
+
+        #Menú de pizzas y precios
+        menu <- nuevo Mapa(Cadena, Real)
+        menu.agregar("pizza pepperoni", 10.99)
+        menu.agregar("pizza 4 quesos", 11.99)
+        menu.agregar("pizza jamón y queso", 9.99)
+
+        #Mostrar el menú
+        Imprimir "Menú de Pizzas:"
+        Para cada entrada en menu
+            Imprimir entrada.clave + ": $" + entrada.valor
+        Fin Para
+
+        #Permitir al usuario seleccionar una pizza y la cantidad deseada
+        Imprimir "\nSeleccione la pizza que desea: "
+        pizzaSeleccionada <- Leer Cadena
+        Imprimir "Ingrese la cantidad que desea pedir: "
+        cantidad <- Leer Entero
+
+        #Calcular el total a pagar
+        totalPagar <- menu.obtenerODefecto(pizzaSeleccionada, 0.0) * cantidad
+
+        #Realizar el pedido
+        orderManager.crearPedido(pizzaSeleccionada, cantidad)
+
+        #Ejemplo de procesamiento de pago
+        Imprimir "\nIngrese el número de su tarjeta de crédito (ejemplo: tarjeta123): "
+        Leer Cadena #Consumir la nueva línea pendiente
+        numeroTarjeta <- Leer Cadena
+
+        pagoExitoso <- paymentProcessor.procesarPago(numeroTarjeta, totalPagar)
+        Imprimir "Procesamiento de pago: " + (pagoExitoso ? "Exitoso" : "Fallido")
+    Sino
+        Imprimir "Autenticación fallida. Cierre del programa."
+    Fin Si
+Fin Algoritmo
