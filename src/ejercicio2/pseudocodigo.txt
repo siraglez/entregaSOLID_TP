@@ -1,0 +1,46 @@
+Algoritmo Authenticator
+    Datos
+        dataBaseManager: DataBaseManager
+    Fin Datos
+
+    Procedimiento Authenticator(dataBaseManager: DataBaseManager)
+        this.dataBaseManager <- dataBaseManager
+    Fin Procedimiento
+
+    Función autenticarUsuario(username: cadena, password: cadena): boolean
+        #Lógica de autenticación
+        #Retorna verdadero si la autenticación es exitosa, de lo contrario, retorna falso
+        Retornar dataBaseManager.verificarCredencialesUsuario(username, password)
+    Fin Función
+Fin Algoritmo
+
+Algoritmo DataBaseManager
+    Datos
+        userCredentials: Map(cadena, cadena)
+        orders: Map(cadena, entero)
+        creditCardBalances: Map(cadena, decimal)
+    Fin Datos
+
+    Procedimiento DataBaseManager()
+        #Datos de ejemplo
+        userCredentials <- nuevo Map(cadena, cadena)
+        userCredentials.insertar("usuario", "contraseña") #Usuario de ejemplo con contraseña
+
+        orders <- nuevo Map(cadena, entero)
+        creditCardBalances <- nuevo Map(cadena, decimal)
+
+        creditCardBalances.insertar("tarjeta123", 1000.0) #Saldo inicial de la tarjeta de crédito de ejemplo
+    Fin Procedimiento
+
+    Función verificarCredencialesUsuario(username: cadena, password: cadena): boolean
+        #Verificar las credenciales del usuario
+        Retornar userCredentials.contieneClave(username) Y userCredentials.obtener(username) = password
+    Fin Función
+
+    Procedimiento guardarPedido(pizzaType: cadena, cantidad: entero)
+        #Guardar el pedido en la base de datos
+        cantidadExistente <- orders.obtenerODefault(pizzaType, 0)
+        orders.insertar(pizzaType, cantidadExistente + cantidad)
+    Fin Procedimiento
+
+    Función cargarTarjetaCredito(numeroTarjeta: cadena
