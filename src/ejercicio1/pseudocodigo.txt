@@ -1,0 +1,44 @@
+Algoritmo Matriz
+    Matriz m
+
+    Procedimiento Matriz(m: matriz)
+        m <- m
+
+    Procedimiento imprimir()
+        Para cada fila en m
+            Para cada elemento en fila
+                Imprimir (elemento + " ")
+            Fin Para
+            Imprimir (nueva línea)
+        Fin Para
+
+    Función transpuesta() retorna Matriz
+        filas <- longitud de m
+        columnas <- longitud de m[0]
+
+        #Crear una nueva matriz para la transpuesta
+        mt <- nueva Matriz de dimensiones [columnas][filas]
+
+        #Calcular la transpuesta
+        Para i desde 0 hasta filas exclusivo
+            Para j desde 0 hasta longitud de m[i] exclusivo
+                mt[j][i] <- m[i][j]
+            Fin Para
+        Fin Para
+
+        Devolver mt
+
+    Procedimiento principal()
+        #Crear una matriz
+        m <- nueva Matriz con los elementos {{1, 2}, {3, 4}}
+
+        #Calcular la transpuesta
+        mt <- m.transpuesta()
+
+        Imprimir ("Matriz original: ")
+        m.imprimir()
+
+        Imprimir (nueva línea)
+        Imprimir ("Matriz transpuesta: ")
+        mt.imprimir()
+Fin Algoritmo
