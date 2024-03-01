@@ -1,0 +1,12 @@
+@startuml
+
+class Matriz {
+  - m: int[][]
+  + Matriz(m: int[][])
+  + imprimir(): void
+  + transpuesta(): Matriz
+}
+
+Matriz --> "1" Matriz : composition
+
+@enduml
